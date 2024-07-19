@@ -14,7 +14,7 @@
 // });
 
 
-import colors from "./colors.json"
-import colorsTmp1 from './templates/colors.handlebars'
-console.log(colorsTmp1);
+// import colors from "./colors.json"
+// import colorsTmp1 from './templates/colors.handlebars'
+// console.log(colorsTmp1);
 

@@ -87,18 +87,73 @@
 
 
 
-const promise1 = new Promise((resolve, reject) =>{
-    setTimeout(()=>{resolve(console.log('проміс 1'))}, 5000)
-})
-const promise2 = new Promise((resolve, reject) =>{
-    setTimeout(()=>{resolve(console.log('проміс 2'))}, 8000)
-})
-const promise3 = new Promise((resolve, reject) =>{
-    setTimeout(()=>{resolve(console.log('проміс 3'))}, 1000)
-})
+// const promise1 = new Promise((resolve, reject) =>{
+//     setTimeout(()=>{resolve(console.log('проміс 1'))}, 5000)
+// })
+// const promise2 = new Promise((resolve, reject) =>{
+//     setTimeout(()=>{resolve(console.log('проміс 2'))}, 8000)
+// })
+// const promise3 = new Promise((resolve, reject) =>{
+//     setTimeout(()=>{resolve(console.log('проміс 3'))}, 1000)
+// })
 
 
-Promise.rase([promise1, promise2, promise3])
-    .then((first) => {
-    return console.log(first);
+// Promise.rase([promise1, promise2, promise3])
+//     .then((first) => {
+//     return console.log(first);
+// })
+
+
+
+
+const horses = [
+  'Secretariat',
+  'Eclipse',
+  'West Australian',
+  'Flying Fox',
+  'Seabiscuit',
+];
+
+function run(hourse) {
+    return new Promise((resolve, reject) =>
+    {
+        const time = getRandomTime(3000, 3500)
+        setTimeout(() => {
+            resolve(`Кінь ${hourse} фінішував за ${time} ms`)
+        })
+    })
+ }
+
+
+function getRandomTime(min, max) {
+    return Math.floor(Math.random() * (max - min +1)+ min)
+}
+
+
+run('Seabiscuit').then((horse) => { console.log(horse); }).catch(error => { console.log(error); })
+ 
+
+
+const promises = horses.map((horse)=>{
+    return run(horse)
+  })
+
+Promise.race(promises)
+.then(({horse, time})=>{
+    console.log(`%c🎉 Переможець ${horse}, финишував за ${time}мс часу`,'color: green');
 })
+
+function run(horse){
+    return new Promise((resolve, reject)=>{
+        const time = getRandomTime(3000, 4000)
+
+        setTimeout(()=>{
+            resolve({
+                horse,
+                time
+            })
+        },time)
+    })
+}
+
+console.log(`🤖 Заїзд розпочався, ставки не приймаються!`);
